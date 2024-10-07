@@ -1,0 +1,107 @@
+Display SMS on your Phone ;
+........................................................
+MainActivity.java
+
+package com.example.smsdemoapp;
+
+import android.os.Bundle;
+import android.text.Html;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView smsTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        smsTextView = findViewById(R.id.smsTextView);
+
+        // Display a dummy SMS message with bold formatting
+        String dummySms = "<b>From:</b> Yogesh Gavande <br><b>Message:</b> Hello, this is a dummy SMS!";
+        smsTextView.setText(Html.fromHtml(dummySms));
+    }
+}
+
+.........................................................
+Activity_Main.xml
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/appNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SMS App"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/smsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dummy SMS will be displayed here"
+        android:textSize="18sp"
+        android:padding="8dp"/>
+</LinearLayout>
+
+............................................................
+
+Manifest File 
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Smsdemoapp"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+
+.......................................
+
+String.xml
+
+
+<resources>
+    <string name="app_name">SMS App</string>
+</resources>
+
+
